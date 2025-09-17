@@ -1,0 +1,21 @@
+{
+  "name": "trademe-cli",
+  "version": "1.0.0",
+  "description": "TradeMe Auction Listing CLI",
+  "main": "index.js",
+  "preferGlobal": true,
+  "bin": "./commands.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.1",
+    "dotenv": "^17.2.2",
+    "inquirer": "^12.9.6",
+    "mongoose": "^8.18.1"
+  },
+  "type": "module"
+}
