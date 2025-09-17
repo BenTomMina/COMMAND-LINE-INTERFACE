@@ -107,5 +107,29 @@ const listListings = () => {
   });
 };
 
+// Search Listings
+const searchListings = async (query) => {
+  try {
+    const res = await fetch(
+      `http://localhost:${process.env.PORT}/search?q=${encodeURIComponent(
+        query
+      )}`
+    );
+    const data = await res.json();
+    console.log("Results:", data.results);
+    mongoose.connection.close();
+  } catch (err) {
+    console.error(chalk.red("API error:", err.message));
+    mongoose.connection.close();
+  }
+};
+
 // Export All Methods
-export { addListing, findListing, updateListing, removeListing, listListings };
+export {
+  addListing,
+  findListing,
+  updateListing,
+  removeListing,
+  listListings,
+  searchListings,
+};

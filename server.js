@@ -72,7 +72,7 @@ app.get("/search", async (req, res) => {
     }
 
     const results = await Auctions.find(mongoQuery);
-    res.json({ query: mongoQuery, results });
+    res.json({ results });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

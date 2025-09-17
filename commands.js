@@ -10,6 +10,7 @@ import {
   updateListing,
   removeListing,
   listListings,
+  searchListings,
 } from "./index.js";
 
 // Auction Listing Questions
@@ -46,6 +47,7 @@ class CustomCommand extends Command {
         trademe-cli update [_ID]   u            To update details for specific listing in the database
         trademe-cli remove [_ID]   r            To remove details for specific listing in the database
         trademe-cli find [TITLE]   f            To find a specific listing in the database
+        trademe-cli search [query] s            To search for listings satisfying the query
 
 `;
   }
@@ -132,5 +134,12 @@ program
   .action(() => {
     listListings();
   });
+
+// Search Command
+program
+  .command("search <query>")
+  .alias("s")
+  .description("Search auction listings using the API")
+  .action(searchListings);
 
 program.parse(process.argv);
