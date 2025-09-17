@@ -12,11 +12,13 @@ import Auctions from "./models/auctions.js";
 // Import Seed Data
 import seedData from "./seedData.js";
 
-// Connect to DB
+// Connect to DB -  will create DB if it doesn't exist yet
 mongoose.connect(process.env.MONGO_URI).then(async () => {
   console.info(chalk.green("Connected to MongoDB - seeding documents"));
 
-  await Auctions.deleteMany({}); //clear existing
+  // Clear existing data
+  await Auctions.deleteMany({});
+  // Enters in seed data
   await Auctions.insertMany(seedData);
 
   console.info(chalk.green("Documents seeded"));

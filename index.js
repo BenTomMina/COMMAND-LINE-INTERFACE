@@ -49,7 +49,7 @@ const findListing = (title) => {
 //     });
 // };
 
-// Update Listing
+// Update Listing - error handling for non-existent Object ID handled by command.js
 const updateListing = (_id, listing) => {
   Auctions.findById(_id)
     .then((doc) => {
@@ -84,7 +84,8 @@ const removeListing = (_id) => {
   Auctions.findById(_id)
     .then((doc) => {
       if (!doc) {
-        throw new Error(chalk.red("Listing not found")); // Throws error if Object ID not found on database
+        // Throws error if Object ID not found on database
+        throw new Error(chalk.red("Listing not found"));
       }
       return Auctions.deleteOne({ _id });
     })
@@ -107,7 +108,7 @@ const listListings = () => {
   });
 };
 
-// Search Listings
+// Search Listings - makes an API call to the server to run a MongoDB query
 const searchListings = async (query) => {
   try {
     const res = await fetch(

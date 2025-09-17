@@ -37,7 +37,7 @@ const questions = [
   },
 ];
 
-// Subclass Command
+// Help Command - displays all available options for the CLI
 class CustomCommand extends Command {
   helpInformation() {
     return `
@@ -57,15 +57,7 @@ const program = new CustomCommand();
 
 program.version("1.0.0").description("Auction Listing Management System");
 
-// program
-//   .command("add <title> <description> <start_price> <reserve_price>")
-//   .alias("a")
-//   .description("Add a listing")
-//   .action((title, description, start_price, reserve_price) => {
-//     addListing({ title, description, start_price, reserve_price });
-//   });
-
-// Add Command
+// Add Command - asks questions to the user to create the listing. Will not create if a field is missing or invalid
 program
   .command("add")
   .alias("a")
@@ -76,7 +68,7 @@ program
     });
   });
 
-// Find Command
+// Find Command - finds a listing based on the title
 program
   .command("find <title>")
   .alias("f")
@@ -86,6 +78,8 @@ program
   });
 
 // Update Command
+
+// Previous Code - kept for reference - code goes through the whole updating process even if the object id given does not exist
 // program
 //   .command("update <_id>")
 //   .alias("u")
@@ -101,9 +95,11 @@ program
   .alias("u")
   .description("Update a listing")
   .action((_id) => {
+    // Looks through the Database to see if the Object ID exists
     Auctions.findById(_id)
       .then((doc) => {
         if (!doc) {
+          // Sends an error if the Object ID does not exist
           throw new Error("Listing not found");
         }
         // Prompt when Object ID has been found
@@ -117,7 +113,7 @@ program
       });
   });
 
-// Remove Command
+// Remove Command - removes a listing based on the Object ID
 program
   .command("remove <_id>")
   .alias("r")
@@ -126,7 +122,7 @@ program
     removeListing(_id);
   });
 
-// List Command
+// List Command - lists all auction listings
 program
   .command("list")
   .alias("l")
@@ -135,7 +131,7 @@ program
     listListings();
   });
 
-// Search Command
+// Search Command - makes an API call to search the database for similar items
 program
   .command("search <query>")
   .alias("s")

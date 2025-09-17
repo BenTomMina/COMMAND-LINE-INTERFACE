@@ -5,6 +5,7 @@ const auctionsSchema = mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   start_price: { type: Number, required: true, min: 1 },
+  // reserve_price has to be euqal to or greater than start_price
   reserve_price: {
     type: Number,
     required: true,

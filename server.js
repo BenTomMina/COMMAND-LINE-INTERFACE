@@ -42,12 +42,14 @@ app.get("/search", async (req, res) => {
   try {
     const contents = [{ role: "user", parts: [{ text: q }] }];
 
+    // Gemini call to make a MongoDB query based on the instructions and search query
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents,
       config: { systemInstruction: prompt },
     });
 
+    // Makes sure the correct field is pulled from the Gemini response
     const candidate = response.candidates?.[0];
     const part = candidate?.content?.parts?.[0];
     const text = part?.text;
@@ -58,6 +60,7 @@ app.get("/search", async (req, res) => {
         .json({ error: "Invalid response from Gemini API" });
     }
 
+    // Formatting the Gemini response to the correct JSON format
     const cleanedText = text.replace(/```json|```/g, "").trim();
     const mongoQuery = JSON.parse(cleanedText);
 
@@ -71,7 +74,9 @@ app.get("/search", async (req, res) => {
       }
     }
 
+    // Searches through the Database with the generated query
     const results = await Auctions.find(mongoQuery);
+    // Displays results
     res.json({ results });
   } catch (err) {
     res.status(500).json({ error: err.message });
