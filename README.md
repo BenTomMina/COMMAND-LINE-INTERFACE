@@ -1,4 +1,4 @@
-# Welcome to **Mission 5 - Phase 1** 🚀
+# Welcome to **Command Line Interface**
 
 ## Overview
 
@@ -32,7 +32,7 @@ Also includes a server which holds the API endpoint to do the search function an
 
 ```bash
 git clone <repo-url>
-cd Mission_5_Phase_1
+cd COMMAND-LINE-INTERFACE
 ```
 
 **Install dependencies**
